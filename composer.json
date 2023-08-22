@@ -8,6 +8,13 @@
             "Elytica\\LaravelCustomMakeModel\\": "src/"
         }
     },
+    "extra": {
+         "laravel": {
+             "providers": [
+                 "Elytica\\LaravelCustomMakeModel\\CustomMigrationServiceProvider"
+             ]
+         }
+     },
      "require": {
         "php": "^8.1",
         "illuminate/support": "^10.0",
