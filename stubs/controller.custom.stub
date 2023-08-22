@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\DummyModel;
+use App\Http\Requests\CreateDummyModelRequest;
+use App\Http\Requests\UpdateDummyModelRequest;
+
+class DummyController extends Controller
+{
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\CreateDummyModelRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateDummyModelRequest $request)
+    {
+        $item = DummyModel::create($request->validated());
+
+        return response()->json($item, 201);  // 201 is HTTP code for "Created"
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateDummyModelRequest  $request
+     * @param  DummyModel  ${dummyModel}
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateDummyModelRequest $request, DummyModel ${dummyModel})
+    {
+        ${dummyModel}->update($request->validated());
+
+        return response()->json(${dummyModel}, 200);  // 200 is HTTP code for "OK"
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  DummyModel  ${dummyModel}
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(DummyModel ${dummyModel})
+    {
+        ${dummyModel}->delete();
+    
+        return response()->json(['message' => 'Deleted successfully'], 200);  // 200 is HTTP code for "OK"
+    }
+
+}
