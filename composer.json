@@ -1,7 +1,7 @@
 {
     "name": "elytica/laravel-custom-make-model",
     "description": "Custom model creator, where you can include fields and foreign keys.",
-    "type": "metapackage",
+    "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
