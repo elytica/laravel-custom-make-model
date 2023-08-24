@@ -15,14 +15,14 @@ class CustomMigrationServiceProvider extends ServiceProvider
             ]);
         }
         $this->publishes([
-          __DIR__."/../../config/{$this->packageName}.php"
+          __DIR__."/../config/{$this->packageName}.php"
           => config_path("{$this->packageName}.php")],
         'config');
     }
 
     public function register() : void {
         $this->mergeConfigFrom(
-          __DIR__."/../../config/{$this->packageName}.php"
+          __DIR__."/../config/{$this->packageName}.php"
           ,"{$this->packageName}.php");
     }
 }
