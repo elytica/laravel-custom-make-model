@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DummyModel;
-use App\Http\Requests\CreateDummyModelRequest;
+use App\Http\Requests\StoreDummyModelRequest;
 use App\Http\Requests\UpdateDummyModelRequest;
 
 class DummyController extends Controller
@@ -11,10 +11,10 @@ class DummyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CreateDummyModelRequest  $request
+     * @param  \App\Http\Requests\StoreDummyModelRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateDummyModelRequest $request)
+    public function store(StoreDummyModelRequest $request)
     {
         $item = DummyModel::create($request->validated());
 

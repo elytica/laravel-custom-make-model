@@ -101,7 +101,7 @@ class CustomModelMigration extends Command
         
         // Check if request should be generated
         if ($this->option('request')) {
-            Artisan::call("make:request Create{$name}Request");
+            Artisan::call("make:request Store{$name}Request");
             Artisan::call("make:request Update{$name}Request");
             $typeToValidationRule = [
                 'string' => 'string',
@@ -119,13 +119,13 @@ class CustomModelMigration extends Command
                 'timestamp' => 'date_format:Y-m-d H:i:s'
             ];
             
-            // Generate validation rules for Create{$name}Request
+            // Generate validation rules for Store{$name}Request
             $validationRules = collect($fields)->map(function ($details, $field) use ($typeToValidationRule) {
                 $rule = $typeToValidationRule[$details['type']] ?? '';
                 return "'$field' => 'required|$rule'";
             })->implode(",\n            ");
 
-            $requestFilePath = app_path("Http/Requests/Create{$name}Request.php");
+            $requestFilePath = app_path("Http/Requests/Store{$name}Request.php");
             $requestContent = file_get_contents($requestFilePath);
             $requestContent = str_replace(
                 '//',
@@ -149,14 +149,14 @@ class CustomModelMigration extends Command
             
             // Adjust the authorize method logic based on the policy and dynamic route parameter
             $authorizeUpdateLogic = <<<EOL
-\$modelInstance = \$this->route('{$routeParamName}');
-return \$this->user()->can('update', \$modelInstance);
-EOL;
+            \$modelInstance = \$this->route('{$routeParamName}');
+            return \$this->user()->can('update', \$modelInstance);
+            EOL;
             
             $updateRequestContent = preg_replace('/return false;/', $authorizeUpdateLogic, $updateRequestContent);
             file_put_contents($updateRequestFilePath, $updateRequestContent);
 
-            $this->info("Create{$name}Request and Update{$name}Request created successfully!");
+            $this->info("Store{$name}Request and Update{$name}Request created successfully!");
         }
 
     }
