@@ -6,7 +6,13 @@ use Illuminate\Console\Command;
 
 class CustomModelMigration extends Command
 {
-    protected $stubPath = config('laravel-custom-make-model.stub_path');
+    protected $stubPath;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->stubPath = config('laravel-custom-make-model.stub_path');
+    }
+
     /**
      * The name and signature of the console command.
      *
