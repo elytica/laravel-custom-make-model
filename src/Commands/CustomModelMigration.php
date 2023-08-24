@@ -113,7 +113,7 @@ class CustomModelMigration extends Command
                 'string' => 'string',
                 'char' => 'string',
                 'integer' => 'integer',
-                'unsigned' => 'integer',
+                'unsigned' => 'integer|min:0',
                 'big' => 'integer',
                 'medium' => 'integer',
                 'tiny' => 'integer',
@@ -122,6 +122,7 @@ class CustomModelMigration extends Command
                 'decimal' => 'numeric',
                 'boolean' => 'boolean',
                 'date' => 'date',
+                'unsignedBigInteger' => 'integer|min:0',
                 'timestamp' => 'date_format:Y-m-d H:i:s'
             ];
             
