@@ -54,7 +54,6 @@ class CustomModelMigration extends Command
              return "\$table->{$details['type']}('{$field}');";
          })->toArray();
 
-
         // Add foreign key constraints
         $foreignConstraints = collect($fields)->filter(function ($details) {
             return $details['foreign'];
@@ -122,7 +121,9 @@ class CustomModelMigration extends Command
             // Generate validation rules for Store{$name}Request
             $validationRules = collect($fields)->map(function ($details, $field) use ($typeToValidationRule) {
                 $rule = $typeToValidationRule[$details['type']] ?? '';
-                return "'$field' => 'required|$rule'";
+                $foreign_exists = ($details['foreign'] ? "exists:$details['foreign'],$details['reference_id']" : '');
+                $foreign_exists .= $foreign_exists ? "|{$foreign_exists}" : '';
+                return "'$field' => 'required|{$rule}{$foreign_exists}'";
             })->implode(",\n            ");
 
             $requestFilePath = app_path("Http/Requests/Store{$name}Request.php");
