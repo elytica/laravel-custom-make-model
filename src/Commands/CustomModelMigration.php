@@ -129,7 +129,7 @@ class CustomModelMigration extends Command
             $validationRules = collect($fields)->map(function ($details, $field) use ($typeToValidationRule) {
                 $rule = $typeToValidationRule[$details['type']] ?? '';
                 $foreign_exists = $details['foreign'] ? "exists:{$details['foreign']},{$details['reference_id']}" : '';
-                $foreign_exists .= $foreign_exists ? "|{$foreign_exists}" : '';
+                $foreign_exists = $foreign_exists ? "|{$foreign_exists}" : '';
                 return "'$field' => 'required|{$rule}{$foreign_exists}'";
             })->implode(",\n            ");
 
