@@ -49,7 +49,7 @@ class CustomModelMigration extends Command
         $modelContent = str_replace(
             ['DummyFillable', 'DummyClass'],
             [implode("', '", array_keys($fields)), $name],
-            file_get_contents(base_path("{$stubPath}/model.custom.stub"))
+            file_get_contents(base_path("{$this->stubPath}/model.custom.stub"))
         );
     
         file_put_contents(app_path("Models/{$name}.php"), $modelContent);
@@ -80,7 +80,7 @@ class CustomModelMigration extends Command
         $migrationContent = str_replace(
             ['DummyTable', 'DummyFields', 'DummyForeignKeys'],
             [Str::snake(Str::plural($name)), $migrationFieldsContent, $foreignDropStatements],
-            file_get_contents(base_path("{$stubPath}/migration.custom.stub"))
+            file_get_contents(base_path("{$this->stubPath}/migration.custom.stub"))
         );
     
         file_put_contents($migrationPath, $migrationContent);
@@ -88,7 +88,7 @@ class CustomModelMigration extends Command
         if ($this->option('controller')) {
             $routeParamName = Str::snake($name);
             $controllerName = "{$name}Controller";
-            $controllerStub = file_get_contents(base_path("{$stubPath}/controller.custom.stub"));
+            $controllerStub = file_get_contents(base_path("{$this->stubPath}/controller.custom.stub"));
             $controllerContent = str_replace(
                 ['DummyModel', 'DummyController', '${dummyModel}'],
                 [$name, $controllerName, "\${$routeParamName}"],
